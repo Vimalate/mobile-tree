@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>建协云APP下载</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="intro">
+				<p>紧紧围绕企业办公应用场景，实现行为和数据的在线化，</p>
+				<p style="margin-left: 100px;">管理和决策的数智化，助力企业数字化转型。</p>
+			</div>
+			<div style="margin-top: 80px;">
+				<img src="img/illustration.png" class="main_img">
+			</div>
+			<div style="margin-top: 50px;">
+				<a href="https://apps.apple.com/cn/app/%E5%BB%BA%E5%8D%8F%E4%BA%91/id1522132208"><button type="button" id="iphone_button"><img src="img/ios.png" style="margin-right: 15px;">iPhone版本下载</button></a>
+			</div>
+			<div style="margin-top: 50px;">
+				<a href="http://app.ccqm.cn:8080/uploadfiles/HHH.H5YUN.NEW/3hcloud.apk" id="link"><button type="button" id="android_button"><img src="img/android.png" style="margin-right: 15px;">Android版本下载</button></a>
+			</div>
+			<div id="wx_tip">
+				<p>
+					<img src="img/tips.png"/>
+				</p>
+				<p>
+					<button type="button" id="close" class="close">关 闭</button>
+				</p>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var is_weixin = (function() {
+			let ua = navigator.userAgent.toLowerCase();
+			if(ua.match(/wxwork/i) == 'wxwork') {
+				return true;
+			}else if(ua.match(/MicroMessenger/i) == 'micromessenger') {
+				return true;
+			}else {
+				return false;
+			}
+		})();
+		window.onload = function() {
+			//禁止双击页面缩放
+			document.documentElement.addEventListener('touchstart', function(event){
+				if(event.touches.length > 1) {
+					event.preventDefault();
+				}
+			}, false);
+
+			let lastTouchEnd = 0;
+			document.documentElement.addEventListener('touchend', function(event){
+				let now = Date.now();
+				if (now - lastTouchEnd <= 300) {
+					event.preventDefault();
+				}
+				lastTouchEnd = now;
+			}, false);
+			//禁止双指手势缩放
+			document.documentElement.addEventListener('gesturestart', function(event){
+				let event = event || window.event;
+				if (typeof event.preventDefault != 'undefined') {
+					event.preventDefault();
+				} else {
+					event.returnValue = false;
+				}
+			});
+
+			let winHeight = typeof window.innerHeight != 'undefined' ? window.innerHeight : document.documentElement.clientHeight;
+			let btn = document.getElementById('link');
+			let tip = document.getElementById('wx_tip');
+			let tip_close = document.getElementById('close');
+			if(is_weixin){
+				btn.onclick = function(e) {
+					tip.style.height = winHeight + 'px';
+					tip.style.display = 'block';
+					return false;
+				}
+				tip_close.onclick = function() {
+					tip.style.display = 'none';
+				}
+			}
+		}
+	</script>
+</html>
+<style type="text/css">
+	.container{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+		background-image: url('img/down_illustration.png');
+		background-repeat: no-repeat;
+		background-position: bottom;
+		background-attachment: fixed;
+	}
+	.intro{
+		font-family: 'Microsoft YaHei';
+		font-size: 35px;
+	}
+	.main_img{
+		width: 650px;
+		height: 600px;
+	}
+	#iphone_button{
+		border: 0;
+		outline: none;
+		font-size: 35px;
+		color: #FFF;
+		background-color: #1f77f0;
+		width: 600px;
+		height: 100px;
+		border-radius: 15px;
+	}
+	#android_button{
+		border: 0;
+		outline: none;
+		font-size: 35px;
+		color: #FFF;
+		background-color: #01c988;
+		width: 600px;
+		height: 100px;
+		border-radius: 15px;
+	}
+	.bottom_img{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+	}
+	#wx_tip{
+		padding-top: 80%;
+		display: none;
+		position: absolute;
+		background: rgba(0,0,0,0.8);
+		filter: alpha(opacity=80);
+		width: 100%;
+		height: 100%;
+		z-index: 100;
+	}
+	#wx_tip p{
+		font-size: 40px;
+		text-align: center;
+		position: relative;
+		margin-top: 10%;
+		padding: 0 5%;
+	}
+	.close{
+		border: 2px solid #FFF;
+		outline: none;
+		font-size: 30px;
+		width: 220px;
+		height: 80px;
+		color: #FFF;
+		border-radius: 15px;
+		padding: 5px;
+		position: absolute;
+		background-color: transparent;
+		left: 40%;
+		top: 0;
+	}
+	#desc_text{
+		color: #FFF;
+	}
+</style>
+
